@@ -1,4 +1,5 @@
 <%@ page import="java.util.Map" %>
+<%@ page import="com.wrox.model.Ticket" %>
 <%
     @SuppressWarnings("unchecked")
     Map<Integer, Ticket> ticketDatabase =

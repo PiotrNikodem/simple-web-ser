@@ -1,4 +1,4 @@
-package com.wrox;
+package com.wrox.session;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;

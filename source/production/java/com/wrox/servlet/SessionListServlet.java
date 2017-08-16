@@ -1,4 +1,6 @@
-package com.wrox;
+package com.wrox.servlet;
+
+import com.wrox.session.SessionRegistry;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

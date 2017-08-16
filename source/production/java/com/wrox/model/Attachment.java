@@ -1,4 +1,4 @@
-package com.wrox;
+package com.wrox.model;
 
 public class Attachment
 {

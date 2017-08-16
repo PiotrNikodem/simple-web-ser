@@ -1,4 +1,4 @@
-package com.wrox;
+package com.wrox.model;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;

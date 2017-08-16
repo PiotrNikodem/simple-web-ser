@@ -1,6 +1,7 @@
-package com.wrox;
+package com.wrox.servlet;
 
 
+import com.wrox.DAO.UserDatabase;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Hashtable;
-import java.util.Map;
 
 @WebServlet(
         name = "loginServlet",
@@ -17,13 +16,11 @@ import java.util.Map;
 )
 public class LoginServlet extends HttpServlet
 {
-    private static final Map<String, String> userDatabase = new Hashtable<>();
 
-    static {
-        userDatabase.put("Nicholas", "password");
-        userDatabase.put("Sarah", "drowssap");
-        userDatabase.put("Mike", "wordpass");
-        userDatabase.put("John", "green");
+    private final static UserDatabase userDatabase = setDatabase();
+
+    public LoginServlet() {
+
     }
 
     @Override
@@ -31,13 +28,15 @@ public class LoginServlet extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
+
         if(request.getParameter("logout") != null)
         {
             session.invalidate();
             response.sendRedirect("login");
             return;
         }
-        else if(session.getAttribute("username") != null)
+
+        if(session.getAttribute("username") != null)
         {
             response.sendRedirect("tickets");
             return;
@@ -53,6 +52,7 @@ public class LoginServlet extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
+
         if(session.getAttribute("username") != null)
         {
             response.sendRedirect("tickets");
@@ -61,19 +61,22 @@ public class LoginServlet extends HttpServlet
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if(username == null || password == null ||
-                !LoginServlet.userDatabase.containsKey(username) ||
-                !password.equals(LoginServlet.userDatabase.get(username)))
+        if(username == null || !password.equals(LoginServlet.userDatabase.getUserMap().get(username)))
         {
             request.setAttribute("loginFailed", true);
             request.getRequestDispatcher("/WEB-INF/jsp/view/login.jsp")
                    .forward(request, response);
         }
         else
-        {
             session.setAttribute("username", username);
             request.changeSessionId();
             response.sendRedirect("tickets");
-        }
+
     }
+
+    private static UserDatabase setDatabase() {
+        return new UserDatabase();
+    }
+
+
 }

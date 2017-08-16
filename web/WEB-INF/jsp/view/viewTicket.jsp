@@ -1,5 +1,7 @@
+<%@ page import="com.wrox.model.Ticket" %>
+<%@ page import="com.wrox.model.Attachment" %>
 <%--@elvariable id="ticketId" type="java.lang.String"--%>
-<%--@elvariable id="ticket" type="com.wrox.Ticket"--%>
+<%--@elvariable id="ticket" type="com.wrox.model.Ticket"--%>
 <%
     Ticket ticket = (Ticket)request.getAttribute("ticket");
 %>

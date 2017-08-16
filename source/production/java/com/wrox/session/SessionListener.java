@@ -1,4 +1,4 @@
-package com.wrox;
+package com.wrox.session;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
